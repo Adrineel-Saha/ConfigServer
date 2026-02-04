@@ -8,7 +8,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/Adrineel-Saha/Configurations
+          uri: https://github.com/Adrineel-Saha/Configurations.git
           clone-on-start: true
           default-label: main
           skipSslValidation: true
