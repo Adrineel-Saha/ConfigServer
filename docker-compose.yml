@@ -1,0 +1,27 @@
+services:
+  eureka-server:
+    image: eureka-server
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    networks:
+      - microservices-net
+
+  config-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: config-server
+    container_name: config-server
+    ports:
+      - "8888:8888"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+    depends_on:
+      - eureka-server
+    networks:
+      - microservices-net
+
+networks:
+  microservices-net:
+    driver: bridge
