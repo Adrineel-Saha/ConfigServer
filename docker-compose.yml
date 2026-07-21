@@ -10,13 +10,16 @@ services:
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
       - EUREKA_INSTANCE_PREFERIPADDRESS=true
-      # Override the C:/Microservices/logs path (used by Jenkins/local) with a
-      # container path; the volume below maps it back to the same host folder.
+      # Config sets logging.file.name to a C:/ path (used by Jenkins/local);
+      # override to a container path written to the 'app-logs' Docker volume.
       - LOGGING_FILE_NAME=/app/logs/ConfigServer/ConfigServer-8888.log
     volumes:
-      - C:/Microservices/logs:/app/logs
+      - app-logs:/app/logs
     networks:
       - microservices-net
+
+volumes:
+  app-logs:
 
 networks:
   microservices-net:
